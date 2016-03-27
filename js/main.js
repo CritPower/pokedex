@@ -4,18 +4,14 @@
 
     pokemonPromise.done(function (data) {
         console.log(data);
-
-        var view = {
-            name: "test name"
-        }
-
         getTemplate("pokemon-item").done(function (html) {
 
-            var rendered = Mustache.render(html, view);
-
+            var rendered;
             var pokemonContainer = $(".pokemons-container");
-            pokemonContainer.append(rendered);
-
+            for (var i = 0; i < data.objects.length; i++) {
+                rendered = Mustache.render(html, data.objects[i]);
+                pokemonContainer.append(rendered);
+            }
         });
     });
 

@@ -1,10 +1,11 @@
 <div class="text-center pokemon-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
     <div class="pokemon-image-container">
-        <img class="img-thumbnail" src="http://pokeapi.co/media/img/1.png">
+        <img class="img-thumbnail" src="http://pokeapi.co/media/img/{{pkdx_id}}.png">
     </div>
     <div class="pokemon-name-container"><span>{{name}}</span></div>
     <div class="pokemon-types-container btn-group">
-        <button class="btn btn-success">Grass</button>
-        <button class="btn btn-primary">Poison</button>
+        {{#types}}
+        <button class="btn btn-success">{{name}}</button>
+        {{/types}}
     </div>
 </div>
