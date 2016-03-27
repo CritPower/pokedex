@@ -8,8 +8,16 @@ $(function () {
         }
 
         $("#btn-loader").on("click", loadMorePokemons);
-        $(".pokemons-container").on("click", ".pokemon-item", function () {
-            var id = $(this).data("id");
+        $(".pokemons-container").on("click", ".pokemon-item", loadPokemonDescription);
+
+        function loadPokemonDescription(pokemonId) {
+            var id;
+            if (pokemonId.type !== undefined) {
+                var id = $(this).data("id");
+            }
+            else {
+                id = pokemonId;
+            }
 
             var pokemonPromise = getPokemon(id);
 
@@ -21,10 +29,6 @@ $(function () {
                     $(".selected-pokenmon-container").append(rendered);
                 });
             })
-        });
-
-        function loadPokemonDescription() {
-
         }
 
         function loadMorePokemons() {
@@ -53,6 +57,7 @@ $(function () {
             var pokemonPromise = getPokemons(amount, skip);
 
             pokemonPromise.done(function (data) {
+                loadPokemonDescription(data.objects[0].pkdx_id);
                 getTemplate("pokemon-item").done(function (html) {
                     var rendered;
                     for (var i = 0; i < data.objects.length; i++) {
