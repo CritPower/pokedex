@@ -9,13 +9,22 @@
             name: "test name"
         }
 
-        var html = $.get("templates/pokemon-item.html");
+        getTemplate("pokemon-item").done(function (html) {
 
-        var rendered = Mustache.render(html, view);
+            var rendered = Mustache.render(html, view);
 
-        var pokemonContainer = $(".pokemons-container");
-        pokemonContainer.append(rendered);
+            var pokemonContainer = $(".pokemons-container");
+            pokemonContainer.append(rendered);
+
+        });
     });
+
+    function getTemplate(templateName) {
+        return $.get({
+            url: "/templates/" + templateName + ".html",
+            _: (new Date()).getTime()
+        });
+    }
 
     function getPokemons(amount) {
         return $.ajax({
