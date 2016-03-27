@@ -1,3 +1,7 @@
 .pokemon-item {
     margin-bottom: 25px;
 }
+.pokemon-image-container {
+    width: 130px;
+    height: 130px;
+}
