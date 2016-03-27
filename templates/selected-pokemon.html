@@ -1,0 +1,48 @@
+<div class="text-center pokemon-details col-lg-7 col-md-7 col-sm-12 col-xs-12">
+    <div class="pokemon-image-container">
+        <img class="img-thumbnail" src="http://pokeapi.co/media/img/{{pkdx_id}}.png">
+    </div>
+    <div class="pokemon-name-container"><span>{{name}} #{{pkdx_id}}</span></div>
+    <div class="pokemon-info-container">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>Type</td>
+                    <td>{{#types}}{{name}}{{/types}}</td>
+                </tr>
+                <tr>
+                    <td>Attack</td>
+                    <td>{{attack}}</td>
+                </tr>
+                <tr>
+                    <td>Defence</td>
+                    <td>{{defense}}</td>
+                </tr>
+                <tr>
+                    <td>HP</td>
+                    <td>{{hp}}</td>
+                </tr>
+                <tr>
+                    <td>SP Attack</td>
+                    <td>{{sp_atk}}</td>
+                </tr>
+                <tr>
+                    <td>SP Defence</td>
+                    <td>{{sp_def}}</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>{{speed}}</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td>{{weight}}</td>
+                </tr>
+                <tr>
+                    <td>Total moves</td>
+                    <td>{{movesCount}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

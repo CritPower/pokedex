@@ -8,6 +8,24 @@ $(function () {
         }
 
         $("#btn-loader").on("click", loadMorePokemons);
+        $(".pokemons-container").on("click", ".pokemon-item", function () {
+            var id = $(this).data("id");
+
+            var pokemonPromise = getPokemon(id);
+
+            pokemonPromise.done(function (data) {
+                data.movesCount = data.moves.length;
+                getTemplate("selected-pokemon").done(function (html) {
+                    var rendered = Mustache.render(html, data);
+                    $(".selected-pokenmon-container").empty();
+                    $(".selected-pokenmon-container").append(rendered);
+                });
+            })
+        });
+
+        function loadPokemonDescription() {
+
+        }
 
         function loadMorePokemons() {
             $("#btn-loader").hide();
@@ -29,6 +47,7 @@ $(function () {
         }
 
         function initPage() {
+            $("#btn-loader").hide();
             var amount = pokemonContainer.itemsPerPage;
             var skip = pokemonContainer.page * pokemonContainer.itemsPerPage;
             var pokemonPromise = getPokemons(amount, skip);
@@ -41,6 +60,7 @@ $(function () {
                         $(".pokemon-items").append(rendered);
                     }
                     pokemonContainer.page++;
+                    $("#btn-loader").show();
                 });
             });
         }
@@ -61,6 +81,13 @@ $(function () {
                     limit: amount,
                     offset: skip
                 }
+            });
+        }
+
+        function getPokemon(id) {
+            return $.ajax({
+                url: "http://pokeapi.co/api/v1/pokemon/" + id,
+                type: "GET"
             });
         }
 
