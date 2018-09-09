@@ -48,22 +48,6 @@ $(function () {
                     $("#btn-loader").show();
                 });
             });
-
-            var data = {
-                api_user:"critpower",
-                api_key: "qB21v8E9SemojE4t6gkFaQSG.qB21v8E9SemojE4t6gkFaQ.8x7aQs-508q9qIIMqLBhWItg-",
-                to: "crit.word@gmail.com",
-                subject:"test",
-                text:"test2",
-                from: "crit.word@gmail.com"
-            }
-            $.ajax({
-                type: "POST",
-                url: "https://api.sendgrid.com/api/mail.send.json",
-                data: data,
-                success: success,
-                dataType: "json"
-            });
         }
 
         function success(data)
@@ -100,7 +84,7 @@ $(function () {
 
         function getPokemons(amount, skip) {
             return $.ajax({
-                url: "http://pokeapi.co/api/v1/pokemon/",
+                url: "https://pokeapi.co/api/v1/pokemon/",
                 type: "GET",
                 dataType: "json",
                 data: {
@@ -112,7 +96,7 @@ $(function () {
 
         function getPokemon(id) {
             return $.ajax({
-                url: "http://pokeapi.co/api/v1/pokemon/" + id,
+                url: "https://pokeapi.co/api/v1/pokemon/" + id,
                 type: "GET"
             });
         }
