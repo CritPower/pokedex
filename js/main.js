@@ -40,9 +40,12 @@ $(function () {
             pokemonPromise.done(function (data) {
                 getTemplate("pokemon-item").done(function (html) {
                     var rendered;
-                    for (var i = 0; i < data.objects.length; i++) {
-                        rendered = Mustache.render(html, data.objects[i]);
-                        $(".pokemon-items").append(rendered);
+                    for (var i = 0; i < data.results.length; i++) {
+                        var pokemonPromise = getPokemon(data.results[i].name);
+                        pokemonPromise.done(function (data) {
+                            rendered = Mustache.render(html, data);
+                            $(".pokemon-items").append(rendered);
+                        })
                     }
                     pokemonContainer.page++;
                     $("#btn-loader").show();
@@ -50,8 +53,7 @@ $(function () {
             });
         }
 
-        function success(data)
-        {
+        function success(data) {
             console.log(data);
         }
 
@@ -62,12 +64,15 @@ $(function () {
             var pokemonPromise = getPokemons(amount, skip);
 
             pokemonPromise.done(function (data) {
-                loadPokemonDescription(data.objects[0].pkdx_id);
+                loadPokemonDescription(data.results[0].name);
                 getTemplate("pokemon-item").done(function (html) {
                     var rendered;
-                    for (var i = 0; i < data.objects.length; i++) {
-                        rendered = Mustache.render(html, data.objects[i]);
-                        $(".pokemon-items").append(rendered);
+                    for (var i = 0; i < data.results.length; i++) {
+                        var pokemonPromise = getPokemon(data.results[i].name);
+                        pokemonPromise.done(function (data) {
+                            rendered = Mustache.render(html, data);
+                            $(".pokemon-items").append(rendered);
+                        })
                     }
                     pokemonContainer.page++;
                     $("#btn-loader").show();
@@ -77,14 +82,14 @@ $(function () {
 
         function getTemplate(templateName) {
             return $.get({
-                url: "/templates/" + templateName + ".html",
+                url: "./templates/" + templateName + ".html",
                 _: (new Date()).getTime()
             });
         }
 
         function getPokemons(amount, skip) {
             return $.ajax({
-                url: "https://pokeapi.co/api/v1/pokemon/",
+                url: "https://pokeapi.co/api/v2/pokemon/",
                 type: "GET",
                 dataType: "json",
                 data: {
@@ -96,7 +101,7 @@ $(function () {
 
         function getPokemon(id) {
             return $.ajax({
-                url: "https://pokeapi.co/api/v1/pokemon/" + id,
+                url: "https://pokeapi.co/api/v2/pokemon/" + id,
                 type: "GET"
             });
         }

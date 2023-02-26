@@ -1,3 +1,4 @@
 # pokedex
 
-Client for http://pokeapi.co/
+Simple UI for http://pokeapi.co/
+Implemented: Mar 27, 2016
